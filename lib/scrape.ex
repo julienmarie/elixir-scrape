@@ -52,6 +52,7 @@ defmodule Scrape do
       feed_data
       
       _-> feed_data
+      end
     end
   end
 
