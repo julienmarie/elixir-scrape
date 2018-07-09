@@ -39,7 +39,19 @@ defmodule Scrape do
             |> String.replace("-", "_")
             |> String.to_atom
         Codepagex.to_string!(feed_data, coded_encoding)
-      [] -> feed_data
+      [] -> 
+          case Regex.scan(~r/charset=(.*)"/, feed_data) do
+          [[_, encoding]] ->
+          coded_encoding =
+          encoding
+            |> String.downcase
+            |> String.replace("-", "_")
+            |> String.to_atom
+        Codepagex.to_string!(feed_data, coded_encoding)
+      [] -> 
+      feed_data
+      
+      _-> feed_data
     end
   end
 
